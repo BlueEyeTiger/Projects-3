@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="style.css">
+    <title>Registracija</title>
+  
+  <!-- 
+    <script defer src ="form.js"></script>  
+  -->
+  
+ 
+
+</head>
+
+<body>
+    <header>
+        <div id="container">
+            <div id="nav">
+              <ul>
+                <li><a href="index.html" >NASLOVNICA</a></li>
+                <li><a href="knjige.html">KNJIGE</a></li>
+                <li><a href="o_nama.html">O NAMA</a></li>
+                <li><a href="registracija.html">REGISTRACIJA</a></li>
+              </ul>
+            </div>
+          </div>
+        <hr>
+    </header>
+
+    <form class ="unos" action="kosarica_a.php">
+        <input type="text" placeholder="Korisničko ime" name="admin"><br>
+        <input type="text" placeholder="Lozinka" name="pass"> 
+        <button type="submit">Prijavite se</button>
+    </form> 
+
+    <h1 class="naslov1">BOOKSHOP B&K</h1>
+
+ <div class="container">
+      
+      <form action="registracija.php" method="POST" id="form" >
+       
+       
+          <h1>Registracija</h1> 
+
+          <div class="input-control">         
+              <label for="ime">Ime:</label>
+              <input name="ime" id="ime" type="text">
+              <div class="error"></div>
+          </div>
+
+          <div class="input-control">
+              <label for="prezime">Prezime:</label>
+              <input name="prezime" id="prezime" type="text">
+              <div class="error"></div>
+          </div>
+          
+          <div class="input-control">
+            <label for="ulica">Ulica i kućni broj:</label>
+            <input id="ulica" name="ulica" type="text">
+            <div class="error"></div>
+      </div>
+
+        <div class="input-control">
+          <label for="grad">Grad:</label>
+         <input id="grad" name="grad" type="text">          
+         <div class="error"></div>
+      </div> 
+
+          <div class="input-control">
+              <label for="email">E-mail:</label>
+              <input id="email" name="email" type="text">
+              <div class="error"></div>
+          </div>
+
+          <div class="input-control">
+            <label for="datum">Datum rođenja:</label>      
+            <input id="datum" name="datum" type="date">
+            <div class="error"></div>
+        </div>
+
+          <div class="input-control">
+            <label for="username">Korisničko ime:</label>
+            <input id="username" name="username" type="text">
+            <div class="error"></div>
+        </div>
+
+          <div class="input-control">
+              <label for="password1">Lozinka:</label>
+              <input id="password1"name="password1" type="password">
+              <div class="error"></div>
+          </div>
+
+          <div class="input-control">
+              <label for="password2">Ponovljena lozinka:</label>
+              <input id="password2"name="password2" type="password">
+              <div class="error"></div>
+          </div>       
+           <input type="submit" value="Pošalji" class="w3-btn w3-blue">     
+         
+      </form>
+
+  </div>
+
+<br><br><br><br><br><br><br>
+
+<div id="container">
+    <div id="nav">
+      <ul>
+        <li><a href="index.html" >Naslovnica</a></li>
+        <li><a href="knjige.html">Knjige</a></li>
+        <li><a href="o_nama.html">O nama</a></li>
+        <li><a href="registracija.html">Registracija</a></li>
+      </ul>
+    </div>
+  </div>
+
+    <br>
+
+
+
+
+
+    <script>
+
+      const form = document.getElementById('form');
+      const ime = document.getElementById('ime');
+      const prezime = document.getElementById('prezime');
+      const ulica = document.getElementById('ulica');
+      const grad = document.getElementById('grad');
+      const datum = document.getElementById('datum');
+      const email = document.getElementById('email');
+      const username = document.getElementById('username');
+      const password1 = document.getElementById('password1');
+      const password2 = document.getElementById('password2');
+      
+      form.addEventListener('submit', e => {
+         // e.preventDefault();
+       
+         validateInputs();
+      });
+      
+/*
+
+      form.addEventListener('submit', (e)=>{
+    
+    validateInputs();
+    console.log(isFormValid());
+    if(isFormValid()==true){
+        form.submit();
+     }else {
+         e.preventDefault();
+     }
+
+});
+
+function isFormValid(){
+    const inputContainers = form.querySelectorAll('.input-group');
+    let result = true;
+    inputContainers.forEach((container)=>{
+        if(container.classList.contains('error')){
+            result = false;
+        }
+    });
+    return result;
+}
+*/
+
+
+
+      const setError = (element, message) => {
+          const inputControl = element.parentElement;
+          const errorDisplay = inputControl.querySelector('.error');
+      
+          errorDisplay.innerText = message;
+          inputControl.classList.add('error');
+          inputControl.classList.remove('success')
+      }
+      
+      const setSuccess = element => {
+          const inputControl = element.parentElement;
+          const errorDisplay = inputControl.querySelector('.error');
+      
+          errorDisplay.innerText = '';
+          inputControl.classList.add('success');
+          inputControl.classList.remove('error');
+      };
+      
+      const isValidEmail = email => {
+          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+      }
+      
+      const validateInputs = () => {
+      
+          const imeValue = ime.value.trim();
+          const prezimeValue = prezime.value.trim();
+          const ulicaValue = ulica.value.trim();
+          const gradValue = grad.value.trim();
+          const datumValue = datum.value.trim();
+          const emailValue = email.value.trim();
+          const usernameValue = username.value.trim();
+          const passwordValue = password1.value.trim();
+          const password2Value = password2.value.trim();
+      
+      
+          if(imeValue === '') {
+              setError(ime, 'Ime je obavezno!');
+          } else {
+              setSuccess(ime);
+          }
+      
+          if(prezimeValue === '') {
+              setError(prezime, 'Prezime je obavezno!');
+          } else {
+              setSuccess(prezime);
+          }
+      
+          if(ulicaValue === '') {
+              setError(ulica, 'Ulica i kućni broj su obavezni!');
+          } else {
+              setSuccess(ulica);
+          }
+      
+          if(gradValue === '') {
+              setError(grad, 'Grad je obavezan!');
+          } else {
+              setSuccess(grad);
+          }
+      
+          if(datumValue === '') {
+              setError(datum, 'Datum je obavezan!');
+          } else {
+              setSuccess(datum);
+          }
+      
+          if(emailValue === '') {
+              setError(email, 'E-mail je obavezan!');
+          } else if (!isValidEmail(emailValue)) {
+              setError(email, 'Unesite ispravnu e-mail adresu!');
+          } else {
+              setSuccess(email);
+          }
+          
+          if(usernameValue === '') {
+              setError(username, 'Korisničko ime je obavezno!');
+          } else {
+              setSuccess(username);
+          }
+      
+          if(passwordValue === '') {
+              setError(password1, 'Lozinka je obavezna!');
+          } else if (passwordValue.length < 10 ) {
+              setError(password1, 'Lozinka mora imati najmanje 10 znamenaka!')
+          } else {
+              setSuccess(password1);
+          }
+      
+          if(password2Value === '') {
+              setError(password2, 'Potvrdite lozinku!');
+          } else if (password2Value !== passwordValue) {
+              setError(password2, "Lozinke se ne podudaraju!");
+          } else {
+              setSuccess(password2);
+          }
+      
+      }
+      </script>
+
+
+
+    <footer class="footer"> © 2022 B&K *All rights reserved* </footer>
+</body>
+</html>
